@@ -53,6 +53,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             isDisabled      : '=',
             itemLabel       : '@',
             maxLabels       : '@',
+            maxLabelText    : '@',
             orientation     : '@',
             selectionMode   : '@',            
                                                          
@@ -491,6 +492,10 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                         }
                         $scope.varButtonLabel += '(Total: ' + $scope.selectedItems.length + ')';                        
                     }
+                    // If 'max-label-text' has been defined use it when displaying all items in the inputModel array
+                    if ( $scope.maxLabelText !== undefined && $scope.selectedItems.length === $scope.inputModel.length ) {
+                        $scope.varButtonLabel = $scope.maxLabelText;
+                    }
                 }
                 $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<span class="caret"></span>' );                
             }
@@ -897,4 +902,3 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
         }   
     }
 }]);
-
